@@ -47,6 +47,10 @@ for(i=0;i<max;i++)
 			pro[j+1]=temp2;
 			
 	}
+		else
+		{
+			printf("do nothing");
+		}
 	}
 }
 printf("\n");
