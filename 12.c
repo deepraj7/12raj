@@ -1,81 +1,109 @@
-#include<stdio.h>
-#include<conio.h>
-#include<stdlib.h>
-void main()
-{
-	int max=3;
+#include<iostream>
+
+using namespace std;
+int readyqueue[3][2];
+	int maxx=3;
 	int i,j,temp1,temp2;
-	int at=0;
-	int pro[3]={2132,2102,2453};
+	int pro[3][3]={{2132,2,2},{2102,4,4},{2453,8,8}};
 	float awt=0,atat=0;
-	int wt[max],tat[max],et[max];
+	int wt[3],tat[3],ct[3];
+	int at[3]={0,0,0};
 	int bt[3]={2,4,8};
-	printf("\n");
-	printf("\n");
-	printf("\t\t\tThe processes along with their ids are as follows:\n");
-	for(i=0;i<max;i++)
+	int bt1[3]={2,4,8};
+
+
+
+int prioritySchedule(int l,int c){
+
+    int result=0;
+    if(pro[l][0]>pro[c][0]){
+        result = c;
+    }else{
+        result = l;
+    }
+    return result;
+}
+int isnull(int R[3][2]){
+    int isThere=0;
+    for(int i=0;i<maxx;i++){
+        if(R[i][1]>0){
+            isThere =1;
+        }
+    }
+    return isThere;
+}
+int isnullA(int R[3][3]){
+    int isThere=0;
+    for(int i=0;i<maxx;i++){
+        if(R[i][1]>0){
+            isThere =1;
+        }
+    }
+    return isThere;
+}
+void display(){
+for(int i=0;i<maxx;i++)
+{
+
+    cout<<endl;
+    cout<<pro[i][0]<<" "<<pro[i][2]<<" "<<ct[i]<<" "<< tat[i]<<" "<<wt[i]<<endl;
+}
+
+}
+int main()
+{
+
+	cout<<"\n";
+	cout<<"\n";
+	cout<<"\t\t\tThe processes along with their ids are as follows:\n";
+	for(i=0;i<maxx;i++)
 	{
-		printf(" \t P[%d]=[%d]\t",(i+1),pro[i]);
+		cout<<" \t P[]=[]\t"<<(i+1)<<pro[i][0];
 	}
-	printf("\n");
-	printf("\n");
-	printf("\t\tThe burst time of the respective processes are as follows:\n");
-for(i=0;i<max;i++)
+	cout<<"\n";
+	cout<<"\n";
+	cout<<"\t\tThe burst time of the respective processes are as follows:\n";
+for(i=0;i<maxx;i++)
 {
-	printf("\t %d\t\t",bt[i]);
+	cout<<"\t \t\t"<<bt[i];
 }
-printf("\n");
-}
+cout<<"\n";
 
-//bubble sort technique for lrtf
-
-for(i=0;i<max;i++)
+int cTALL=0;
+int k=0;
+do
 {
-	for(j=0;j<max-i-1;j++)
+    int counter=0;
+
+    for(int i=0;i<maxx;i++)
 	{
-		if(bt[j+1]>bt[j])
+
+		if(at[i]==k && bt[i]>0)
 		{
-			temp1=bt[j];
-			bt[j]=bt[j+1];
-			bt[j+1]=temp1;
+			readyqueue[counter++][0]=pro[i][0];
+            readyqueue[counter++][1]=pro[i][1];
+
 		}
-		else if(bt[j+1]=bt[j])
-		{
-		
-			temp2=pro[j];
-			pro[j]=pro[j+1];
-			pro[j+1]=temp2;
-			
 	}
-		else
-		{
-			printf("do nothing");
-		}
-	}
-}
-printf("\n");
-printf("    process id \t    burst time \t    waiting time    turnaround time    ending time \n");
+	int longprocess=0;
 
-for(i=0;i<max;i++)
-{
-	wt[i]=0;
-	tat[i]=0;
-	at=0;
-	for(j=0;j<i;j++)
-	{
-	wt[i]+=bt[j];	
-	}
-	
-	tat[i]=wt[i]+bt[i];
-	et[i]=tat[i]+at;
-	awt+=wt[i];
-	atat+=tat[i];
-	printf("\t%d\t\t %d\t\t %d\t\t %d\t\t   %d\n",pro[i],bt[i],wt[i],tat[i],et[i]);
-	
+	for(int i=0;i<counter;i++)
+    {
+     if(bt[longprocess] < readyqueue[i][1] && readyqueue[i][1]>0){
+        longprocess = i;
+     }
+     else if(bt[longprocess]== readyqueue[i][1] && readyqueue[i][1]>0){
+        longprocess = prioritySchedule(longprocess,i);
+     }
+    }
+    cTALL++;
+    pro[longprocess][1]-=1;
+    ct[longprocess] = cTALL;
+    tat[longprocess] = ct[longprocess] - at[longprocess];
+    wt[longprocess] = tat[longprocess] - bt1[longprocess];
+    k++;
+
+}while(isnull(readyqueue)==1|| isnullA(pro)==1);
+display();
 }
 
-awt/=max;
-atat/=max;
-printf("\n");
-printf("\n\t\t\t\t  Average waiting time is= %f\n",awt);
-printf("\n\t\t\t\tAverage turn around time is= %f\n",atat);
