@@ -9,7 +9,7 @@ Enter the number of processes
 3  
 
 
-Pid AT BT
+Pid AT BT    
 2132 0 2      
 2102 2 4     
 2453 4 8     
