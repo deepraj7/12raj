@@ -5,15 +5,15 @@ Note: Recompile with -Xlint:unchecked for details.
 
 F:\4th sem study\projects>java RunScheduler
 
-Enter the number of processes
-3
+Enter the number of processes 
+3  
 
 
 Pid AT BT
-2132 0 2
-2102 2 4
-2453 4 8
-                                        Gaant Chart
+2132 0 2      
+2102 2 4     
+2453 4 8     
+                                            Gaant Chart
 
 P[2132]-> P[2132]-> P[2102]-> P[2102]-> P[2453]-> P[2453]-> P[2453]-> P[2453]-> P[2453]-> P[2453]-> P[2102]-> P[2453]-> P[2102]-> P[2453]-> P[2453]->
 
