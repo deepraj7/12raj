@@ -43,15 +43,18 @@ class RunScheduler {
 	static int allDone()
 {
 		int is = 0;
-		for (Process p : ar) {
-			if (p.bt > 0) {
+		for (Process p : ar)
+		{
+			if (p.bt > 0)
+			{
 				is += 1;
 			}
 		}
 		return is;  //used to ensure that if burst time is 0, then when the next process is reached then the burst time is incremented
 	}
 
-	static void LRTF() {
+	static void LRTF()
+	{
 		ArrayList<Process> readyqueue = new ArrayList(); //another Arraylist with readyqueue type object to store varibles
 		int timer = 0, ct = 0, m = 0;  //timer to increment the process time and completion time alongwith a counter varible m
 		System.out.println("\t\t\t\t\tGaant Chart\n");
